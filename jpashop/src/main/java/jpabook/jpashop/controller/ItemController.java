@@ -55,8 +55,11 @@ public class ItemController {
 
     @GetMapping("items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+
         Book item = (Book) itemService.findOne(itemId);
+
         BookForm form = new BookForm();
+        form.setId(item.getId());
         form.setName(item.getName());
         form.setPrice(item.getPrice());
         form.setStockQuantity(item.getStockQuantity());
@@ -68,18 +71,24 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("bookForm") BookForm form) {
+    public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("bookForm") BookForm form) {
 
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//
+//        itemService.saveItem(book);
 
-        itemService.saveItem(book);
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
+
         return "redirect:/items";
+
     }
+
+
 }
 

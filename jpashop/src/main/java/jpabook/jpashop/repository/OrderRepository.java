@@ -6,7 +6,6 @@ import jakarta.persistence.criteria.*;
 import jpabook.jpashop.domain.Member;
 import lombok.RequiredArgsConstructor;
 import jpabook.jpashop.domain.Order;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 

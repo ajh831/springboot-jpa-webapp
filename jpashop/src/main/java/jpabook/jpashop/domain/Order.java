@@ -22,6 +22,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+//    @ManyToOne(fetch = EAGER)
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id") // Member가 연관관계 주인
     private Member member;
@@ -29,6 +30,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+//    @OneToOne(fetch = EAGER, cascade = CascadeType.ALL)
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id") // Order가 연관관계 주인
     private Delivery delivery;

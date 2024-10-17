@@ -37,6 +37,7 @@ public class Order {
 
     private LocalDateTime orderDate; // 주문시간
 
+    @Enumerated(value = EnumType.STRING)
     private OrderStatus status; // 주문상태 [ORDER, CANCLE]
 
     // == 연관관계 메서드 == //

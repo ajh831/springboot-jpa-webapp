@@ -63,10 +63,10 @@ public class InitDb {
         }
 
         public void dbInit2() {
-//            Member member = createMember("userB", "진주", "2", "2222");
-//            em.persist(member);
+            Member member = createMember("userB", "진주", "2", "2222");
+            em.persist(member);
 
-            Member member = em.find(Member.class, 1L); // userA가 오늘, 내일 주문하는 경우
+//            Member member = em.find(Member.class, 1L); // userA가 오늘, 내일 주문하는 경우
 
             Book book1 = createBook("SPRING1 BOOK", 20000, 200);
             em.persist(book1);

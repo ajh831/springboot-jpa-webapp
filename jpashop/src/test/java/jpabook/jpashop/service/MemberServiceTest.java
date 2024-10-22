@@ -37,7 +37,13 @@ public class MemberServiceTest {
 
         // then
 //        em.flush();
+/*
+        // Spring Data JPA 적용 전
         assertEquals(member, memberRepository.findOne(saveId));
+*/
+        // Spring Data JPA 적용 후
+        assertEquals(member, memberRepository.findById(saveId).get());
+
     }
     
     @Test(expected = IllegalStateException.class)

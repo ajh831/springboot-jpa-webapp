@@ -40,13 +40,24 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+/*
+    // Spring Data JPA 적용 전
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+*/
+    // Spring Data JPA 적용 후
+    public Member findOne(Long memberId) {
+        return memberRepository.findById(memberId).get();
     }
 
     @Transactional
     public void update(Long id, String name) {
+/*
+        // Spring Data JPA 적용 전
         Member member = memberRepository.findOne(id);
+*/
+        Member member = memberRepository.findById(id).get();
         member.setName(name);
         /*
             영속상태의 Member를 setName으로 이름을 바꿔주면

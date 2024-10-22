@@ -1,7 +1,6 @@
 package jpabook.jpashop.repository.order.query;
 
 import jakarta.persistence.EntityManager;
-import jpabook.jpashop.domain.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +27,7 @@ public class OrderQueryRepository {
     public List<OrderQueryDto> findAllByDto_optimization() {
         List<OrderQueryDto> result = findOrders();
 
-        Map<Long, List<OrderItemQueryDto>> orderItemMap = findOrderItemMap(toOrderIds(result););
+        Map<Long, List<OrderItemQueryDto>> orderItemMap = findOrderItemMap(toOrderIds(result));
 
         result.forEach(o -> o.setOrderItems(orderItemMap.get(o.getOrderId())));
 
@@ -70,6 +69,18 @@ public class OrderQueryRepository {
                 "select new jpabook.jpashop.repository.order.query.OrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address) from Order o" +
                         " join o.member m" +
                         " join o.delivery d", OrderQueryDto.class)
+                .getResultList();
+    }
+
+    public List<OrderFlatDto> findAllByDto_flat() {
+        return em.createQuery(
+                "select new" +
+                        " jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d" +
+                        " join o.orderItems oi" +
+                        " join oi.item i", OrderFlatDto.class)
                 .getResultList();
     }
 }
